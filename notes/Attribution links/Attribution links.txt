@@ -1,6 +1,6 @@
 scissors attribution:
 <a href="https://www.flaticon.com/free-icons/scissors" title="scissors icons">Scissors icons created by Good Ware - Flaticon</a>
-curbe attribution
+curve attribution
 <a href="https://www.flaticon.com/free-icons/line" title="line icons">Line icons created by Freepik - Flaticon</a>
 
 

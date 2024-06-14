@@ -36,7 +36,7 @@
   },
   "name":"Groovy",
   "resources":[
-    {"id":{"name":"Note1","path":"notes/Note1/Note1.yy",},},
+    {"id":{"name":"Attribution links","path":"notes/Attribution links/Attribution links.yy",},},
     {"id":{"name":"obj_brush","path":"objects/obj_brush/obj_brush.yy",},},
     {"id":{"name":"obj_inspector_manager","path":"objects/obj_inspector_manager/obj_inspector_manager.yy",},},
     {"id":{"name":"Object2","path":"objects/Object2/Object2.yy",},},
