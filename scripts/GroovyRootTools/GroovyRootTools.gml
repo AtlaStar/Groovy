@@ -2,7 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function GroovyTool(owner = undefined) constructor {
 	static draw = function() {}
-	static action = function() {
+	static action = function(shape) {
 		return GroovyResult.NO_RESULT_TYPE
 	}
 	static icon = Sprite9

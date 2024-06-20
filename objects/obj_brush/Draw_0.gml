@@ -4,10 +4,9 @@
 //control.draw()
 ControlDock.draw()
 
-/*
-var mat1 = matrix_build(x, y, 0,0,0,-phy_rotation, 1, 1, 1)
-matrix_set(matrix_world, mat1)
+
+var mat1 = matrix_build(x, y, 0,0,0,0, 1, 1, 1)
+//matrix_set(matrix_world, mat1)
 poly.draw()
 matrix_stack_pop()
-matrix_set(matrix_world, matrix_stack_top())
-*/
+//matrix_set(matrix_world, matrix_stack_top())
