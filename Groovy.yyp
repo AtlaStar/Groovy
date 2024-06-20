@@ -48,6 +48,7 @@
     {"id":{"name":"GroovyBSquare","path":"scripts/GroovyBSquare/GroovyBSquare.yy",},},
     {"id":{"name":"GroovyBStar","path":"scripts/GroovyBStar/GroovyBStar.yy",},},
     {"id":{"name":"GroovyPanToolBase","path":"scripts/GroovyPanToolBase/GroovyPanToolBase.yy",},},
+    {"id":{"name":"GroovyPolyBezierToolBase","path":"scripts/GroovyPolyBezierToolBase/GroovyPolyBezierToolBase.yy",},},
     {"id":{"name":"GroovyRootTools","path":"scripts/GroovyRootTools/GroovyRootTools.yy",},},
     {"id":{"name":"GroovySliceToolBase","path":"scripts/GroovySliceToolBase/GroovySliceToolBase.yy",},},
     {"id":{"name":"GroovyStampBase","path":"scripts/GroovyStampBase/GroovyStampBase.yy",},},

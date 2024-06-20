@@ -88,6 +88,8 @@ function make_bezier_star(points, x, y, r_inner, r_mid, r_outer,v_inner=0, v_mid
 }
 
 
+//tool should be renamed or split into two different versions with clamped params as this can be used to make
+//the regular polygons in addition to "star" like shapes with multiple points
 
 function StarTool(owner = undefined) : StampTool(owner) constructor {
 	static icon = spr_stamp_icon;

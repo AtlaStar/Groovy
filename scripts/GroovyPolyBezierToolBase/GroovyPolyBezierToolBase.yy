@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"GroovyPolyBezierToolBase",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GroovyPolyBezierToolBase",
+  "parent":{
+    "name":"GroovyTools",
+    "path":"folders/Scripts/GroovyTools.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
