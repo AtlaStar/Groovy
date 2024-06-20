@@ -48,7 +48,7 @@ function make_bezier_star(points, x, y, r_inner, r_mid, r_outer,v_inner=0, v_mid
 			.translate(_x, _y)
 	}
 
-	var poly = new ClosedPolycurve()
+	var poly = new CubicStar()
 	poly.shapes = [];
 	poly.points = points;
 	poly.r1 = r_inner
@@ -125,7 +125,7 @@ function StarTool(owner = undefined) : StampTool(owner) constructor {
 	static rot3 = 0
 	
 	static action = function(shape) {
-		if is_instanceof(shape, ClosedPolycurve)	{
+		if is_instanceof(shape, CubicStar)	{
 			r1 = shape.r1
 			r2 = shape.r2
 			r3 = shape.r3
@@ -213,7 +213,7 @@ function StarTool(owner = undefined) : StampTool(owner) constructor {
 		return GroovyResult.NO_RESULT_TYPE
 	}
 	static draw = function(shape) {
-		if is_instanceof(shape, ClosedPolycurve)	{
+		if is_instanceof(shape, CubicStar)	{
 			var c1 = on_ring(shape, r1) ? c_yellow : c_silver;
 			var c2 = on_ring(shape, r2) ? c_yellow : c_silver;
 			var c3 = on_ring(shape, r3) ? c_yellow : c_silver;
@@ -240,4 +240,19 @@ function StarTool(owner = undefined) : StampTool(owner) constructor {
 		var dy = mouse_y - shape.y
 		return sqrt(dx*dx + dy*dy) - ring
 	}
+}
+
+function CubicStar() : ClosedPolycurve() constructor {
+	points = 0;
+	r1 = 0
+	r2 = 0
+	r3 = 0
+	
+	v1 = 0
+	v2 = 0
+	v3 = 0
+	
+	rot1 = 0
+	rot2 = 0
+	rot3 = 0
 }
