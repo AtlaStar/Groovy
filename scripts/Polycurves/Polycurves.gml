@@ -26,6 +26,8 @@ function Polycurve() : IShape() constructor {
 			shape.refresh(VBO, false)
 		})
 		vertex_end(VBO)
+		
+		show_debug_message(vertex_get_number(VBO))
 		AABB = get_AABB()
 		is_dirty = false;
 	}
@@ -172,7 +174,6 @@ function Polycurve() : IShape() constructor {
 		array_foreach(shapes, function(shape) {
 			shape.set_texture(sprite)	
 		})
-		is_dirty = true;
 		return self
 	}
 	

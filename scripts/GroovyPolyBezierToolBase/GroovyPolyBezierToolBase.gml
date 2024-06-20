@@ -3,11 +3,16 @@
 function DrawTool(owner = undefined) : GroovyTool(owner) constructor {
 	static icon = spr_draw_icon
 	static shortcut_key = ord("D")
-	static threshold = 5;
+	static threshold = 10;
 	static tension = 0.5;
-	static thickness = 10;
+	static thickness = 30;
+	static texture = Sprite1
 	static points_queue = [];
 	
+	/**
+	 * Function Description
+	 * @param {struct.Polycurve} shape Description
+	 */
 	static action = function(shape) {
 		if mouse_check_button(mb_left) && is_instanceof(shape, Polycurve){
 			var p = new GrooVEC2(mouse_x, mouse_y)
@@ -37,8 +42,9 @@ function DrawTool(owner = undefined) : GroovyTool(owner) constructor {
 				b3 = new GrooVEC2(b3x, b3y)
 				
 				var bez = new CBezier(b1, b2, b3, b4)
-				bez.set_stroke(thickness)
-				bez.is_dirty = true;
+				bez.set_stroke(shape.stroke_thickness)
+				bez.sprite = shape.sprite
+				
 				array_push(shape.shapes, bez)
 				shape.refresh();
 			}

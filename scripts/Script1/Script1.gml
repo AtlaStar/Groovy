@@ -168,20 +168,18 @@ function Bezier() : IShape() constructor {
 		)
 		for(var i = 0; i < array_length(net_mesh_lut); i++) {
 
-			
 			var elem = net_mesh_lut[i]
 			var p = elem.get_point();
-			
 
 			var nx_off = normals[i].x*stroke_thickness/2
 			var ny_off = normals[i].y*stroke_thickness/2
-			
+
 			var np1 = new GrooVEC2(p.x - nx_off, p.y - ny_off)
 			var np2 = new GrooVEC2(p.x + nx_off, p.y + ny_off)
-			
+
 			vertex_position(_vbo, p.x - nx_off, p.y - ny_off)
 			vertex_color(_vbo, color, 1)
-			
+
 			if sprite > -1 {
 				var h_c = sprite_get_height(sprite)*tex_scale_y
 				var w_c = sprite_get_width(sprite)*tex_scale_x
