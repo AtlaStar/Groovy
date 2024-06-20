@@ -1,9 +1,9 @@
 {
   "$GMScript":"",
-  "%Name":"GroovyStampBase",
+  "%Name":"GroovyRootTools",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"GroovyStampBase",
+  "name":"GroovyRootTools",
   "parent":{
     "name":"GroovyTools",
     "path":"folders/Scripts/GroovyTools.yy",

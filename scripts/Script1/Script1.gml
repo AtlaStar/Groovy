@@ -405,51 +405,6 @@ function QBezier(_A,_B,_C) : Bezier(_A,_B,_C) constructor {
 
 }
 
-function GroovyTool(owner = undefined) constructor {
-	static draw = function() {}
-	static action = function() {
-		return GroovyResult.NO_RESULT_TYPE
-	}
-	static icon = Sprite9
-	static shortcut_key = 0x00;
-	if owner
-		static_get(owner).add_tool(self)
-}
-
-function NullTool(owner = undefined) : GroovyTool(owner) constructor {}
-
-function PanTool(owner = undefined) : GroovyTool(owner) constructor {
-	static icon = spr_pan_icon
-	static shortcut_key = ord("P")
-}
-
-function SliceTool(owner = undefined) : GroovyTool(owner) constructor {
-	static icon = spr_slice_icon;
-	static shortcut_key = 0xBF // the '/' key
-	static f = 24
-	static col = c_yellow
-	/// @desc Function Description
-	/// @param {struct.IShape} shape Description
-	static action = function(shape) {
-		if is_instanceof(shape, Polycurve) {
-			
-		} else if shape != noone {
-
-		}
-		return GroovyResult.NO_RESULT_TYPE
-	}
-	
-	static draw = function(shape) {
-		if !shape
-			return shape
-		var np = shape.get_nearest_point(mouse_x, mouse_y)
-		if np {
-			var scale = f/sprite_get_width(icon)
-			draw_sprite_ext(icon, 0, np.x, np.y, scale, scale, 0, col, 1)
-		}
-	}
-}
-
 
 function GroovyResult() {
 	static NO_RESULT_TYPE = {has_result: false}
