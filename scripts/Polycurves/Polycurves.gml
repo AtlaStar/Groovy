@@ -164,7 +164,6 @@ function Polycurve() : IShape() constructor {
 			max_coords.x = p.x2 > max_coords.x ? p.x2 : max_coords.x
 			max_coords.y = p.y2 > max_coords.y ? p.y2 : max_coords.y
 		}
-		
 		return {x1: min_coords.x, y1: min_coords.y, x2: max_coords.x, y2: max_coords.y}
 	}
 	
@@ -174,6 +173,7 @@ function Polycurve() : IShape() constructor {
 			shape.set_texture(sprite)	
 		})
 		is_dirty = true;
+		return self
 	}
 	
 	static set_stroke = function(s) {
@@ -182,6 +182,7 @@ function Polycurve() : IShape() constructor {
 			shape.set_stroke(stroke_thickness)	
 		})
 		is_dirty = true;
+		return self
 	}
 	static set_texture_scale = function(u,v) {
 		tex_scale_x = u
@@ -191,6 +192,7 @@ function Polycurve() : IShape() constructor {
 			shape.set_texture_scale(tex_scale_x, tex_scale_y)	
 		})
 		is_dirty = true;
+		return self
 	}
 	
 	static copy = function(pcurve) {
@@ -204,6 +206,7 @@ function Polycurve() : IShape() constructor {
 		sprite = pcurve.sprite
 		tex_scale_x = pcurve.tex_scale_x
 		tex_scale_y = pcurve.tex_scale_y
+		color = pcurve.color
 	}
 	
 	static set_wireframe_state = function(state, only_children = false) {
@@ -255,10 +258,58 @@ function Polycurve() : IShape() constructor {
 		array_foreach(shapes, function(shape) {
 			shape.color = color;	
 		})
+		is_dirty = true;
+		return self
 	}
 	
 	AABB = get_AABB()
 	is_dirty = true;
 	VBO = -1;
 	refresh();
+}
+
+function ClosedPolycurve() : Polycurve() constructor {
+	points = 0;
+	static refresh = function(_vbo = VBO < 0 ? vertex_create_buffer() : VBO) {
+		VBO = _vbo;
+
+		vertex_begin(VBO, v_fmt)
+		array_foreach(shapes, function(shape) {
+			shape.refresh(VBO, false)
+			//shape.show_wireframe = true
+			show_wireframe = false;
+		})
+
+		if !array_length(shapes)
+			return -1;
+		var p = shapes[0].get_point_at_t(0)
+		var nx_off = shapes[0].normals[0].x * stroke_thickness/2
+		var ny_off = shapes[0].normals[0].y * stroke_thickness/2
+		
+		
+		vertex_position(VBO, p.x - nx_off, p.y - ny_off)
+		vertex_color(VBO, color, 1)
+		
+		if sprite > -1 {
+			var h_c = sprite_get_height(sprite)*tex_scale_y
+			var w_c = sprite_get_width(sprite)*tex_scale_x
+		} else {
+			var h_c = 1
+			var w_c = 1
+		}
+
+		var u = (p.x - nx_off)/w_c
+		var v = (p.y - ny_off)/h_c
+		vertex_texcoord(VBO, u, v)
+
+		vertex_position(VBO, p.x + nx_off, p.y + ny_off)
+		vertex_color(VBO, color, 1)
+		u = (p.x + nx_off)/w_c
+		v = (p.y + ny_off)/h_c
+		vertex_texcoord(VBO, u,v)
+
+		vertex_end(VBO)
+		AABB = get_AABB()
+		is_dirty = false;
+	}
 }

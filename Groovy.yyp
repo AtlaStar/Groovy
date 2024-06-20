@@ -43,6 +43,7 @@
     {"id":{"name":"Object3","path":"objects/Object3/Object3.yy",},},
     {"id":{"name":"Objject1_clone","path":"objects/Objject1_clone/Objject1_clone.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"id":{"name":"ControlCode","path":"scripts/ControlCode/ControlCode.yy",},},
     {"id":{"name":"GroovyBSquare","path":"scripts/GroovyBSquare/GroovyBSquare.yy",},},
     {"id":{"name":"GroovyBStar","path":"scripts/GroovyBStar/GroovyBStar.yy",},},
     {"id":{"name":"GroovyStampBase","path":"scripts/GroovyStampBase/GroovyStampBase.yy",},},

@@ -48,7 +48,7 @@ function make_bezier_star(points, x, y, r_inner, r_mid, r_outer,v_inner=0, v_mid
 			.translate(_x, _y)
 	}
 
-	var poly = new CubicStar(_x, _y)
+	var poly = new ClosedPolycurve()
 	poly.shapes = [];
 	poly.points = points;
 	poly.r1 = r_inner
@@ -87,56 +87,11 @@ function make_bezier_star(points, x, y, r_inner, r_mid, r_outer,v_inner=0, v_mid
 	return poly
 }
 
-function CubicStar(_x, _y) : Polycurve() constructor {
-	points = 0;
-	static refresh = function(_vbo = VBO < 0 ? vertex_create_buffer() : VBO) {
-		VBO = _vbo;
 
-		vertex_begin(VBO, v_fmt)
-		array_foreach(shapes, function(shape) {
-			shape.refresh(VBO, false)
-			//shape.show_wireframe = true
-			show_wireframe = false;
-		})
 
-		if !array_length(shapes)
-			return -1;
-		var p = shapes[0].get_point_at_t(0)
-		var nx_off = shapes[0].normals[0].x * stroke_thickness/2
-		var ny_off = shapes[0].normals[0].y * stroke_thickness/2
-		
-		
-		vertex_position(VBO, p.x - nx_off, p.y - ny_off)
-		vertex_color(VBO, color, 1)
-		
-		if sprite > -1 {
-			var h_c = sprite_get_height(sprite)*tex_scale_y
-			var w_c = sprite_get_width(sprite)*tex_scale_x
-		} else {
-			var h_c = 1
-			var w_c = 1
-		}
-
-		var u = (p.x - nx_off)/w_c
-		var v = (p.y - ny_off)/h_c
-		vertex_texcoord(VBO, u, v)
-
-		vertex_position(VBO, p.x + nx_off, p.y + ny_off)
-		vertex_color(VBO, color, 1)
-		u = (p.x + nx_off)/w_c
-		v = (p.y + ny_off)/h_c
-		vertex_texcoord(VBO, u,v)
-
-		vertex_end(VBO)
-		AABB = get_AABB()
-		is_dirty = false;
-	}
-}
-
-function StarTool() : StampTool() constructor {
+function StarTool(owner = undefined) : StampTool(owner) constructor {
 	static icon = spr_stamp_icon;
 	static shortcut_key = ord("8")
-	StampTool.register_subtools(self)
 	static action_in_progress = false;
 	//default circle radii 
 	static dr1 = 90
@@ -170,7 +125,7 @@ function StarTool() : StampTool() constructor {
 	static rot3 = 0
 	
 	static action = function(shape) {
-		if is_instanceof(shape, CubicStar)	{
+		if is_instanceof(shape, ClosedPolycurve)	{
 			r1 = shape.r1
 			r2 = shape.r2
 			r3 = shape.r3
@@ -251,14 +206,14 @@ function StarTool() : StampTool() constructor {
 				new_shape.set_stroke(4)
 				new_shape.refresh()
 				GroovyCanvas.active_canvas.add_new_shape(new_shape)
-				ControlDock.singleton.selected_shape = new_shape
+				ControlDock.selected_shape = new_shape
 			}
 			return GroovyResult.NO_RESULT_TYPE
 		}
 		return GroovyResult.NO_RESULT_TYPE
 	}
 	static draw = function(shape) {
-		if is_instanceof(shape, CubicStar)	{
+		if is_instanceof(shape, ClosedPolycurve)	{
 			var c1 = on_ring(shape, r1) ? c_yellow : c_silver;
 			var c2 = on_ring(shape, r2) ? c_yellow : c_silver;
 			var c3 = on_ring(shape, r3) ? c_yellow : c_silver;

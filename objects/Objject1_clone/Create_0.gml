@@ -40,19 +40,7 @@ test2 = new CBezier(p[3], p[4], p[5], p[6])
 test3 = new CBezier(p[6], p[7], p[8], p[9])
 test4 = new CBezier(p[9], p[10], p[11], p[0])
 */
-control = new ControlDock();
-new StampTool()
-new StarTool()
-new PanTool()
-new PanTool()
-new PanTool()
-new PanTool()
-new PanTool()
-new PanTool()
-new PanTool()
-new PanTool()
-new PanTool()
-new PanTool()
+
 randomize()
 roundness = 1;
 poly = make_bezier_star(irandom_range(3,6),x, y, 20,25,32,0,.5,1,)
