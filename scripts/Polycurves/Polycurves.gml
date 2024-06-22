@@ -9,6 +9,7 @@ function Polycurve() : IShape() constructor {
 	}
 	
 	static draw = function() {
+		
 		vertex_submit(VBO, pr_trianglestrip, sprite > -1 ? sprite_get_texture(sprite, 0) : -1)
 		array_foreach(shapes, function(shape) {
 			shape.draw(0,0,false)
@@ -27,7 +28,7 @@ function Polycurve() : IShape() constructor {
 		})
 		vertex_end(VBO)
 		
-		show_debug_message(vertex_get_number(VBO))
+
 		AABB = get_AABB()
 		is_dirty = false;
 	}

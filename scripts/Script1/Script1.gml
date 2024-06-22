@@ -445,3 +445,41 @@ function GroovyCanvas() constructor {
 		})	
 	}
 }
+
+
+function triangulate_midpoint(p1, p2, p3) {
+	//we move a point to 0, because we need to ensure the points are somewhat normalized before solving for the center of the circle
+	//formed by the 3 points
+	var x1 = 0
+	var x2 = p2.x - p1.x
+	var x3 = p3.x - p1.x
+
+				
+	var y1 = 0
+	var y2 = p2.y - p1.y
+	var y3 = p3.y - p1.y
+
+				
+	var r1 = 0
+	var r2 = x2*x2 + y2*y2
+	var r3 = x3*x3 + y3*y3
+				
+	//simplified math because of having 0 for x1, y1, and r1
+	var det11 = det2x2([x2, y2], [x3, y3])
+	var det12 = det2x2([r2, y2], [r3, y3])
+	var det13 = det2x2([r2, x2], [r3, x3])
+				
+	if det11 == 0 {
+		//well fuck, we are on a line
+		var mx1 = min(p1.x, p2.x, p3.x)
+		var mx2 = max(p1.x, p2.x, p3.x)
+		var my1 = min(p1.y, p2.y, p3.y)
+		var my2 = max(p1.y, p2.y, p3.y)
+		return new GrooVEC2((mx1+mx2)/2, (my1+my2)/2)
+	}
+
+	var mx = .5 * det12/det11 + p1.x;
+	var my = -.5 * det13/det11 + p1.y;
+	
+	return new GrooVEC2(mx, my)
+}
